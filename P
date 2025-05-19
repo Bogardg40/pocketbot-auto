@@ -1,0 +1,41 @@
+# bot.py
+
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import undetected_chromedriver as uc
+
+# === CONFIGURE YOUR LOGIN DETAILS HERE ===
+EMAIL = "Bogardg40@outlook.com"
+PASSWORD = "1205Kr$$$"
+URL = "https://pocketoption.com/en/login/"
+
+# === SETUP SELENIUM BROWSER ===
+options = uc.ChromeOptions()
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-blink-features=AutomationControlled')
+driver = uc.Chrome(options=options)
+
+# === LOGIN SEQUENCE ===
+def login():
+    driver.get(URL)
+    time.sleep(3)
+
+    driver.find_element(By.NAME, 'email').send_keys(EMAIL)
+    driver.find_element(By.NAME, 'password').send_keys(PASSWORD)
+    driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+
+    time.sleep(5)
+    print("✅ Logged into Pocket Option.")
+
+# === MAIN FUNCTION ===
+def main():
+    login()
+    # Add your automation logic here
+    print("🧠 Add trade logic or signal scanner here.")
+    time.sleep(60)
+    driver.quit()
+
+if __name__ == "__main__":
+    main()
